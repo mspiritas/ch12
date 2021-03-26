@@ -23,6 +23,8 @@
     $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
     if (!$sort) $sort = 'price';
 
+    $firstname = filter_input(INPUT_GET, 'firstname', FILTER_SANITIZE_STRING);
+
     $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
     if (!$action) {
         $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
@@ -67,5 +69,11 @@
     }
 
     if ($action === 'register') include('view/register.php');
+
+    switch($action) {
+        case 'firstname':
+
+            break;
+    }
 
     include('view/vehicle_list.php');
