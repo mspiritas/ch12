@@ -88,10 +88,12 @@
 
     switch($action) {
         case 'register':
-            if($userid) {
-            $message = "Thanks for registering.";
-            // Step 5
-            include('register.php');    
+            if(isset($firstname)) {
+                $message = "Thanks for registering.";
+            }
+            if(!isset($firstname)) {
+                // Step 5
+                include('register.php');
             }
         case 'logout':
             unset($_SESSION['firstname']);
