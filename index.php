@@ -1,8 +1,17 @@
 <?php
 
+    // Step 2
     $lifetime = 60 * 60 * 24 * 14;
     session_set_cookie_params($lifetime, '/');
     session_start();
+    echo session_id();
+
+    // Step 6
+    $firstname = filter_input(INPUT_GET, 'firstname', FILTER_SANITIZE_STRING);
+
+    if(empty($_SESSION['firstname'])) {
+        $_SESSION['firstname'] = array();
+    }
 
     // Model 
     require('model/database.php');
@@ -22,8 +31,6 @@
     $class_id = filter_input(INPUT_GET, 'class_id', FILTER_VALIDATE_INT);
     $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
     if (!$sort) $sort = 'price';
-
-    $firstname = filter_input(INPUT_GET, 'firstname', FILTER_SANITIZE_STRING);
 
     $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
     if (!$action) {
@@ -68,12 +75,28 @@
         });
     }
 
-    if ($action === 'register') include('view/register.php');
 
-    switch($action) {
-        case 'firstname':
 
-            break;
+    // Step 7
+    if (isset($_GET['firstname'])) {
+        $firstname = $_GET['firstname'];
     }
 
-    include('view/vehicle_list.php');
+    // Step 8
+    $_SESSION['firstname'] = 'userid';
+    $firstname = $_SESSION['firstname'];
+
+    switch($action) {
+        case 'register':
+            if($userid) {
+            $message = "Thanks for registering.";
+            // Step 5
+            include('register.php');    
+            }
+        case 'logout':
+            unset($_SESSION['firstname']);
+            $_SESSION = array();
+            break;
+        default:
+            include('view/vehicle_list.php');
+    }

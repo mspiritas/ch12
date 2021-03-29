@@ -10,7 +10,9 @@
 <body>
     <main>
         <header>
+            <!-- Step 3 -->
+            <p class="right-align"><a href="view/register.php" action="register">Register</a></p>
             <h1>Zippy Used Autos</h1>
         </header>
 
-        <p><a href=".?action=register">Register</a></p>
+        

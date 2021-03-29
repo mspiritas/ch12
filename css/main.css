@@ -44,6 +44,10 @@
     color: black;
     font-size: 150%;
   }
+
+  .right-align {
+    text-align: right;
+  }
   
   h2 {
     font-size: 120%;
@@ -87,7 +91,6 @@
   }
   
   /*==== Utility Classes ====*/
-  
   .button {
     border-radius: 10px;
     text-shadow: 2px 2px 2px #000;
@@ -334,4 +337,14 @@
     .admin-table, .admin-table-overflow {
       max-height: 70vh;
     }
+  }
+
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .personalmessage {
+    color: goldenrod;
+    font-size: 2em;
   }
