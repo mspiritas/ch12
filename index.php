@@ -40,6 +40,8 @@
         }
     }
 
+    $welcome_message = 'You have already registered.';
+
     // Get Data for View
     /* if ($make_id) {
         $make_name = get_make_name($make_id);
@@ -78,26 +80,38 @@
 
 
     // Step 7
-    if (isset($_GET['firstname'])) {
-        $firstname = $_GET['firstname'];
+    if (isset($firstname)) {
+        include('welcome.php');
+    } else {
+        $firstname = FALSE;
     }
 
     // Step 8
-    $_SESSION['firstname'] = 'userid';
-    $firstname = $_SESSION['firstname'];
+    if ($firstname) {
+        $_SESSION['userid'] = $firstname;
+    }
 
     switch($action) {
         case 'register':
-            if(isset($firstname)) {
-                $message = "Thanks for registering.";
-            }
-            if(!isset($firstname)) {
-                // Step 5
-                include('register.php');
-            }
+            include('view/register.php');
+            break;
+        // Step 14
         case 'logout':
-            unset($_SESSION['firstname']);
             $_SESSION = array();
+            session_destroy();
+
+            $name = session_name();
+            $expire = strtotime('-1 year');
+            $params = session_get_cookie_params();
+            $path = $params['path'];
+            $domain = $params['domain'];
+            $secure = $params['secure'];
+            $httponly = $params['httponly'];
+            setcookie($name, '', $expire, $path, $domain, $secure, $httponly);
+            include('view/logout.php');
+           break;
+        case 'welcome':
+            include('view/welcome.php');
             break;
         default:
             include('view/vehicle_list.php');

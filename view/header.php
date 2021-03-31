@@ -1,3 +1,12 @@
+<?php $firstname = filter_input(INPUT_GET, 'firstname', FILTER_SANITIZE_STRING); ?>
+<?php $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
+    if (!$action) {
+        $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+        if (!$action) {
+            $action = 'list_vehicles';
+        }
+    } ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -10,9 +19,15 @@
 <body>
     <main>
         <header>
-            <!-- Step 3 -->
+            <!-- Step 10 / 11 -->
+            <?php if ($action != 'register' && !isset($_SESSION['userid'])) { ?>
+            <!-- Step 3 / 4-->
             <p class="right-align"><a href="view/register.php" action="register">Register</a></p>
             <h1>Zippy Used Autos</h1>
+            <?php } else if (isset($_SESSION['userid']) && ($action != 'register' || $action != 'logout')) { ?>
+                <!-- Step 12 -->
+                <p>Welcome, <?php echo $firstname ?>! (<a href="view/logout.php" action="logout">Sign Out</a>)</p><br>
+            <?php } ?>
         </header>
 
         
