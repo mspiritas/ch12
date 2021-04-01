@@ -1,11 +1,15 @@
-<?php $firstname = filter_input(INPUT_GET, 'firstname', FILTER_SANITIZE_STRING); ?>
-<?php $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
+<?php 
+    $firstname = filter_input(INPUT_GET, 'firstname', FILTER_SANITIZE_STRING);
+    $_SESSION['userid'] = $firstname;
+
+    $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
     if (!$action) {
         $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
         if (!$action) {
             $action = 'list_vehicles';
         }
-    } ?>
+    }
+?>
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +30,7 @@
             <h1>Zippy Used Autos</h1>
             <?php } else if (isset($_SESSION['userid']) && ($action != 'register' || $action != 'logout')) { ?>
                 <!-- Step 12 -->
-                <p>Welcome, <?php echo $firstname ?>! (<a href="view/logout.php" action="logout">Sign Out</a>)</p><br>
+                <p>Welcome, <?php echo $_SESSION['userid'] ?>! (<a href="view/logout.php" action="logout">Sign Out</a>)</p><br>
             <?php } ?>
         </header>
 
