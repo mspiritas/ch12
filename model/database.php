@@ -1,8 +1,8 @@
 <?php
     //local development server connection
-    $dsn = 'mysql:host=localhost;dbname=zippyusedautos';
-    $username = 'root';
-    //$password = 'pa55word';
+    $dsn = 'mysql:host=vkh7buea61avxg07.cbetxkdyhwsb.us-east-1.rds.amazonaws.com;dbname=zippyusedautos';
+    $username = 'me5hq8qqkn50znwh';
+    $password = 'zwzt9qb7oqgpopi1';
 
     // Heroku connection
     /* 
